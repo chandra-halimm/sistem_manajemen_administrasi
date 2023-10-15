@@ -1,0 +1,15 @@
+* {
+  font-family: "Fira Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Work Sans", sans-serif;
+}
+
+.cover {
+  background-size: cover;
+  overflow: hidden !important;
+  width: 100%;
+}
+
+.mt-100 {
+  margin-top: 200px !important;
+}

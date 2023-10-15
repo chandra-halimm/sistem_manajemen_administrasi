@@ -23,25 +23,44 @@ router.get("/login", (req, res) => {
   });
 });
 
-router.post("/login", loginValidation, (req, res) => {
+router.post("/login", loginValidation, async (req, res) => {
   const { email } = req.body;
-  db.query(
-    `SELECT * FROM login WHERE email =  ${db.escape(email)}`,
-    (err, result) => {
-      if (err) {
-        console.error("Database error:", err);
-        return res.status(500).json({
-          message: "internal server error",
-        });
-      }
-      if (result.length) {
-        return res.statu(400).json({
-          message: "user not found",
-        });
-      }
+
+  try {
+    const result = await queryDatabase(
+      `SELECT * FROM login WHERE email = ${db.escape(email)}`
+    );
+
+    if (result.length === 0) {
+      return res.status(404).json({
+        message: "User not found",
+      });
     }
-  );
+
+    const user = result[0];
+    return res.status(200).json({
+      data: user,
+      message: "Login successful",
+    });
+  } catch (err) {
+    console.error("Database error:", err);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
 });
+
+function queryDatabase(sql) {
+  return new Promise((resolve, reject) => {
+    db.query(sql, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
 
 router.post("/regitser", registerValidation, async (req, res) => {
   const { nip, nama, email, password } = req.body;
