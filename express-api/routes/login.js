@@ -62,7 +62,7 @@ function queryDatabase(sql) {
   });
 }
 
-router.post("/regitser", registerValidation, async (req, res) => {
+router.post("/register", registerValidation, async (req, res) => {
   const { nip, nama, email, password } = req.body;
 
   try {

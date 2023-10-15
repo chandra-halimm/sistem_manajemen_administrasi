@@ -15,9 +15,9 @@ const Login = () => {
     setPassword(inputPassword);
   };
 
-  const userLogin = () => {
+  const userLogin = (event) => {
     const requestingData = {
-      username: username,
+      email: username,
       password: password,
     };
     axios({
@@ -25,11 +25,11 @@ const Login = () => {
       url: "http://localhost:3300/login",
       data: requestingData,
     })
-      .then((res) => {
-        localStorage.setItem("username", res.data.result.username);
+      .then(() => {
+        window.location.replace("/dashboard");
       })
       .catch(() => {
-        alert("Password Salah");
+        alert("username atau password salah");
       });
   };
   console.log(handleUsername);
