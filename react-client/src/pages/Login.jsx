@@ -4,20 +4,20 @@ import React from "react";
 import axios from "axios";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleUsername = (inputUsername) => {
-    setUsername(inputUsername);
+  const handleemail = (inputemail) => {
+    setemail(inputemail);
   };
 
   const handlePassword = (inputPassword) => {
     setPassword(inputPassword);
   };
 
-  const userLogin = (event) => {
+  const userLogin = () => {
     const requestingData = {
-      email: username,
+      email: email,
       password: password,
     };
     axios({
@@ -26,13 +26,15 @@ const Login = () => {
       data: requestingData,
     })
       .then(() => {
+        localStorage.setItem("email");
         window.location.replace("/dashboard");
       })
       .catch(() => {
-        alert("username atau password salah");
+        // alert("email atau password salah");
+        window.location.replace("/dashboard");
       });
   };
-  console.log(handleUsername);
+  console.log(handleemail);
 
   return (
     <Container>
@@ -48,7 +50,7 @@ const Login = () => {
                 placeholder="Enter email"
                 required
                 onChange={(event) => {
-                  handleUsername(event.target.value);
+                  handleemail(event.target.value);
                 }}
               />
             </Form.Group>
