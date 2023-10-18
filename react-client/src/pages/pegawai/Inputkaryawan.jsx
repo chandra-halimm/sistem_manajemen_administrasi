@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 import "../../style/Dashboard.css";
 
 const Inputkaryawan = () => {
@@ -28,6 +29,62 @@ const Inputkaryawan = () => {
     } else {
       setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
     }
+  };
+
+  const [namaLengkap, setNamaLengkap] = useState("");
+  const [email, setEmail] = useState("");
+  const [tanggalLahir, setTanggalLahir] = useState("");
+  const [nomorTelpon, setNomorTelpon] = useState("");
+  const [gaji, setGaji] = useState("");
+  const [tanggalMasuk, setTanggalMasuk] = useState("");
+  const [jabatan, setJabatan] = useState("");
+
+  const handleNama = (inputNama) => {
+    setNamaLengkap(inputNama);
+  };
+  const handleEmail = (inputEmail) => {
+    setEmail(inputEmail);
+  };
+
+  const handleTanggalLahir = (inputTanggalLahir) => {
+    setTanggalLahir(inputTanggalLahir);
+  };
+
+  const handleNomorTelpon = (inputNomorTelpon) => {
+    setNomorTelpon(inputNomorTelpon);
+  };
+  const handleGaji = (inputGaji) => {
+    setGaji(inputGaji);
+  };
+
+  const handleTanggalMasuk = (inputTanggalMasuk) => {
+    setTanggalMasuk(inputTanggalMasuk);
+  };
+
+  const handleJabatan = (inputJabatan) => {
+    setJabatan(inputJabatan);
+  };
+
+  const inputPegawai = () => {
+    const requestingData = {
+      namaLengkap: namaLengkap,
+      email: email,
+      tanggalLahir: tanggalLahir,
+      nomorTelpon: nomorTelpon,
+      gaji: gaji,
+      tanggalMasuk: tanggalMasuk,
+      jabatan: jabatan,
+    };
+    axios({
+      method: "POST",
+      url: "http://localhost:3300/pegawai",
+      data: requestingData,
+    }).then((result) => {
+      if (result.data) {
+        alert("success add data");
+        window.location.replace("/pegawai");
+      }
+    });
   };
 
   return (
