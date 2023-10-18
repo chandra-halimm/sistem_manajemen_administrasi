@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import "../style/Dashboard.css";
+import "../../style/Dashboard.css";
 
 const Editkaryawan = () => {
   const [style, setStyle] = useState(

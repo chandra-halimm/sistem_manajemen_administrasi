@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import "../style/Dashboard.css";
+import "../../style/Dashboard.css";
 
-const Inputkaryawan = () => {
+const EditPelanggan = () => {
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
@@ -518,4 +518,4 @@ const Inputkaryawan = () => {
   );
 };
 
-export default Inputkaryawan;
+export default EditPelanggan;

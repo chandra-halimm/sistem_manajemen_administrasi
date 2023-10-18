@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table } from "react-bootstrap";
-import "../style/Dashboard.css";
+import "../../style/Dashboard.css";
 
 const Pegawai = () => {
   const [style, setStyle] = useState(
@@ -55,14 +55,6 @@ const Pegawai = () => {
             {/*   <!-- Divider --> */}
             <hr className="sidebar-divider my-0" />
 
-            {/*  <!-- Nav Item - Dashboard --> */}
-            {/* <li className="nav-item active">
-              <a className="nav-link" href="index.html">
-                <i className="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-              </a>
-            </li> */}
-
             {/*  <!-- Divider --> */}
             <hr className="sidebar-divider" />
 
@@ -73,6 +65,14 @@ const Pegawai = () => {
             <hr className="sidebar-divider" />
 
             {/* <!-- Nav Item - Charts --> */}
+
+            <li className="nav-item">
+              <a href="pelanggan" className="nav-link" type="submit">
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+
             <li className="nav-item">
               <a
                 href="pegawai"
@@ -87,25 +87,51 @@ const Pegawai = () => {
               </a>
             </li>
 
+            <li className="nav-item">
+              <a href="pelanggan" className="nav-link" type="submit">
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Data Pelanggan</span>
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a
+                className="nav-link collapsed"
+                href="a#"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+              >
+                <i className="fas fa-fw fa-cog"></i>
+                <span>Data Transaksi</span>
+              </a>
+              <div
+                id="collapseTwo"
+                className="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+              >
+                <div className="bg-white py-2 collapse-inner rounded">
+                  <h6 className="collapse-header">Transaksi</h6>
+                  <a className="collapse-item" href="buttons.html">
+                    Informasi Transaksi
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Penjualan
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Pembelian
+                  </a>
+                </div>
+              </div>
+            </li>
+
             {/*  <!-- Nav Item - Tables --> */}
             <li className="nav-item">
-              <a className="nav-link" href="tables.html">
+              <a className="nav-link" href="databarang">
                 <i className="fas fa-fw fa-table"></i>
                 <span>Datang Barang</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Masuk</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Keluar</span>
               </a>
             </li>
 
@@ -186,210 +212,6 @@ const Pegawai = () => {
                     </div>
                   </li>
 
-                  {/*  <!-- Nav Item - Alerts --> */}
-                  <li className="nav-item dropdown no-arrow mx-1">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      href="a"
-                      id="alertsDropdown"
-                      role="button"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <i className="fas fa-bell fa-fw"></i>
-                      {/*  <!-- Counter - Alerts --> */}
-                      <span className="badge badge-danger badge-counter">
-                        3+
-                      </span>
-                    </a>
-                    {/*   <!-- Dropdown - Alerts --> */}
-                    <div
-                      className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                      aria-labelledby="alertsDropdown"
-                    >
-                      <h6 className="dropdown-header">Alerts Center</h6>
-                      <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="a"
-                      >
-                        <div className="mr-3">
-                          <div className="icon-circle bg-primary">
-                            <i className="fas fa-file-alt text-white"></i>
-                          </div>
-                        </div>
-                        <div>
-                          <div className="small text-gray-500">
-                            December 12, 2019
-                          </div>
-                          <span className="font-weight-bold">
-                            A new monthly report is ready to download!
-                          </span>
-                        </div>
-                      </a>
-                      <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="a"
-                      >
-                        <div className="mr-3">
-                          <div className="icon-circle bg-success">
-                            <i className="fas fa-donate text-white"></i>
-                          </div>
-                        </div>
-                        <div>
-                          <div className="small text-gray-500">
-                            December 7, 2019
-                          </div>
-                          $290.29 has been deposited into your account!
-                        </div>
-                      </a>
-                      <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="a"
-                      >
-                        <div className="mr-3">
-                          <div className="icon-circle bg-warning">
-                            <i className="fas fa-exclamation-triangle text-white"></i>
-                          </div>
-                        </div>
-                        <div>
-                          <div className="small text-gray-500">
-                            December 2, 2019
-                          </div>
-                          Spending Alert: We've noticed unusually high spending
-                          for your account.
-                        </div>
-                      </a>
-                      <a
-                        className="dropdown-item text-center small text-gray-500"
-                        href="a"
-                      >
-                        Show All Alerts
-                      </a>
-                    </div>
-                  </li>
-
-                  {/*  <!-- Nav Item - Messages --> */}
-                  <li className="nav-item dropdown no-arrow mx-1">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      href="a"
-                      id="messagesDropdown"
-                      role="button"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <i className="fas fa-envelope fa-fw"></i>
-                      {/*  <!-- Counter - Messages --> */}
-                      <span className="badge badge-danger badge-counter">
-                        7
-                      </span>
-                    </a>
-                    {/*   <!-- Dropdown - Messages --> */}
-                    <div
-                      className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                      aria-labelledby="messagesDropdown"
-                    >
-                      <h6 className="dropdown-header">Message Center</h6>
-                      <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="a"
-                      >
-                        <div className="dropdown-list-image mr-3">
-                          <img
-                            className="rounded-circle"
-                            src="img/undraw_profile_1.svg"
-                            alt="..."
-                          />
-                          <div className="status-indicator bg-success"></div>
-                        </div>
-                        <div className="font-weight-bold">
-                          <div className="text-truncate">
-                            Hi there! I am wondering if you can help me with a
-                            problem I've been having.
-                          </div>
-                          <div className="small text-gray-500">
-                            Emily Fowler · 58m
-                          </div>
-                        </div>
-                      </a>
-                      <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="a"
-                      >
-                        <div className="dropdown-list-image mr-3">
-                          <img
-                            className="rounded-circle"
-                            src="img/undraw_profile_2.svg"
-                            alt="..."
-                          />
-                          <div className="status-indicator"></div>
-                        </div>
-                        <div>
-                          <div className="text-truncate">
-                            I have the photos that you ordered last month, how
-                            would you like them sent to you?
-                          </div>
-                          <div className="small text-gray-500">
-                            Jae Chun · 1d
-                          </div>
-                        </div>
-                      </a>
-                      <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="a"
-                      >
-                        <div className="dropdown-list-image mr-3">
-                          <img
-                            className="rounded-circle"
-                            src="img/undraw_profile_3.svg"
-                            alt="..."
-                          />
-                          <div className="status-indicator bg-warning"></div>
-                        </div>
-                        <div>
-                          <div className="text-truncate">
-                            Last month's report looks great, I am very happy
-                            with the progress so far, keep up the good work!
-                          </div>
-                          <div className="small text-gray-500">
-                            Morgan Alvarez · 2d
-                          </div>
-                        </div>
-                      </a>
-                      <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="a"
-                      >
-                        <div className="dropdown-list-image mr-3">
-                          <img
-                            className="rounded-circle"
-                            src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                            alt="..."
-                          />
-                          <div className="status-indicator bg-success"></div>
-                        </div>
-                        <div>
-                          <div className="text-truncate">
-                            Am I a good boy? The reason I ask is because someone
-                            told me that people say this to all dogs, even if
-                            they aren't good...
-                          </div>
-                          <div className="small text-gray-500">
-                            Chicken the Dog · 2w
-                          </div>
-                        </div>
-                      </a>
-                      <a
-                        className="dropdown-item text-center small text-gray-500"
-                        href="a"
-                      >
-                        Read More Messages
-                      </a>
-                    </div>
-                  </li>
-
                   <div className="topbar-divider d-none d-sm-block"></div>
 
                   {/* <!-- Nav Item - User Information --> */}
@@ -467,9 +289,12 @@ const Pegawai = () => {
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>NIP</th>
                     <th>Nama Lengkap</th>
                     <th>Email</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Nomor Telepon</th>
+                    <th>Gaji</th>
+                    <th>Tanggal Masuk</th>
                     <th>Jabatan</th>
                     <th>Action</th>
                   </tr>
@@ -477,9 +302,12 @@ const Pegawai = () => {
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>1233</td>
                     <td>Chandra Halim</td>
                     <td>chan.halim98@gmail.com</td>
+                    <td>12/12/2020</td>
+                    <td>0891231312</td>
+                    <td>Rp -</td>
+                    <td>08/08/2008</td>
                     <td>Operator CTP</td>
                     <td className="d-flex justify-content-center">
                       <a className="btn px-4 btn-success" href="editkaryawan">

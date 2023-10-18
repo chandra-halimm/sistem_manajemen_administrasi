@@ -76,6 +76,13 @@ function Dashboard() {
 
             {/* <!-- Nav Item - Charts --> */}
             <li className="nav-item">
+              <a href="pelanggan" className="nav-link" type="submit">
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+
+            <li className="nav-item">
               <a
                 href="pegawai"
                 className="nav-link"
@@ -89,25 +96,51 @@ function Dashboard() {
               </a>
             </li>
 
+            <li className="nav-item">
+              <a href="pelanggan" className="nav-link" type="submit">
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Data Pelanggan</span>
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a
+                className="nav-link collapsed"
+                href="a#"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+              >
+                <i className="fas fa-fw fa-cog"></i>
+                <span>Data Transaksi</span>
+              </a>
+              <div
+                id="collapseTwo"
+                className="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+              >
+                <div className="bg-white py-2 collapse-inner rounded">
+                  <h6 className="collapse-header">Transaksi</h6>
+                  <a className="collapse-item" href="buttons.html">
+                    Informasi Transaksi
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Penjualan
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Pembelian
+                  </a>
+                </div>
+              </div>
+            </li>
+
             {/*  <!-- Nav Item - Tables --> */}
             <li className="nav-item">
-              <a className="nav-link" href="tables.html">
+              <a className="nav-link" href="databarang">
                 <i className="fas fa-fw fa-table"></i>
                 <span>Datang Barang</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Masuk</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Keluar</span>
               </a>
             </li>
 
@@ -457,7 +490,7 @@ function Dashboard() {
                     className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                   >
                     <i className="fas fa-download fa-sm text-white-50"></i>{" "}
-                    Tambah Karyawan
+                    Generate Report
                   </a>
                 </div>
 
@@ -830,7 +863,7 @@ function Dashboard() {
                           courtesy of{" "}
                           <a
                             target="_blank"
-                            rel="nofollow"
+                            rel="nofollow noreferrer"
                             href="https://undraw.co/"
                           >
                             unDraw
@@ -841,7 +874,7 @@ function Dashboard() {
                         </p>
                         <a
                           target="_blank"
-                          rel="nofollow"
+                          rel="nofollow noreferrer"
                           href="https://undraw.co/"
                         >
                           Browse Illustrations on unDraw &rarr;
