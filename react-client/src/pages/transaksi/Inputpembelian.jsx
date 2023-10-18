@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "../../style/Dashboard.css";
 
-const Inputkaryawan = () => {
+const InputPembelian = () => {
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
@@ -449,7 +449,7 @@ const Inputkaryawan = () => {
               <div className="container-fluid">
                 {/*  <!-- Page Heading --> */}
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                  <h1 className="h3 mb-0 text-gray-800">Input Pegawai</h1>
+                  <h1 className="h3 mb-0 text-gray-800">Input Pelanggan</h1>
                   <a
                     href="inputkaryawan"
                     onClick={() => {
@@ -466,43 +466,11 @@ const Inputkaryawan = () => {
                 <div className="col-8">
                   <Form>
                     <Form.Group className="mb-3" controlId="nip">
-                      <Form.Label>Nama Lengkap</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Masukkan nama lengkap"
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="email">
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control type="text" placeholder="Masukkan email" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="tanggallahir">
-                      <Form.Label>Tanggal Lahir</Form.Label>
-                      <Form.Control
-                        type="date"
-                        placeholder="Masukkan tanggal lahir"
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="nomortelepon">
-                      <Form.Label>Nomor Telepon</Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder="Masukkan nomor telepon"
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="gaji">
-                      <Form.Label>Gaji</Form.Label>
-                      <Form.Control type="number" placeholder="Masukkan gaji" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="tanggalmasuk">
-                      <Form.Label>Tanggal Masuk</Form.Label>
-                      <Form.Control
-                        type="date"
-                        placeholder="Masukkan tanggal masuk"
-                      />
+                      <Form.Label>Tanggal Pembelian</Form.Label>
+                      <Form.Control type="date" placeholder="Masukkan nip" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="jabatan">
-                      <Form.Label>Jabatan</Form.Label>
+                      <Form.Label>Nama Barang</Form.Label>
                       <select
                         class="form-select form-select-sm mb-3"
                         aria-label=".form-select-sm example"
@@ -512,6 +480,13 @@ const Inputkaryawan = () => {
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                       </select>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="nama">
+                      <Form.Label>Harga</Form.Label>
+                      <Form.Control
+                        type="number"
+                        placeholder="Masukkan nama lengkap"
+                      />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                       Submit
@@ -539,4 +514,4 @@ const Inputkaryawan = () => {
   );
 };
 
-export default Inputkaryawan;
+export default InputPembelian;

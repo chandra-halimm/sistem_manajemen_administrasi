@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import "../../style/Dashboard.css";
 
-const DataPelanggan = () => {
+const TransaksiPenjualan = () => {
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
@@ -289,18 +289,20 @@ const DataPelanggan = () => {
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Tanggal Pembelian</th>
-                    <th>Nama Barang</th>
-                    <th>Harga</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Alamat</th>
+                    <th>Nomor Telepon</th>
+                    <th>Email</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>20/20/2020</td>
-                    <td>Plate Platinum</td>
-                    <td>Rp. 1.200.000</td>
+                    <td>Jambi Ekspress</td>
+                    <td>Mayang dekat sini</td>
+                    <td>0213123413</td>
+                    <td>jambiekspress@gmail.com</td>
                     <td className="d-flex justify-content-center">
                       <a className="btn px-4 btn-success" href="editpelanggan">
                         Edit
@@ -332,4 +334,4 @@ const DataPelanggan = () => {
   );
 };
 
-export default DataPelanggan;
+export default TransaksiPenjualan;
