@@ -1,8 +1,35 @@
-import React, { useState } from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import "../../style/Dashboard.css";
+import axios from "axios";
 
 const Pegawai = () => {
+  const [pegawaiList, setPegawaiList] = useState([]);
+
+  const deleteUser = (pegawaiID) => {
+    axios({
+      method: "DELETE",
+      url: `http://localhost:3300/pegawai/${pegawaiID}`,
+    })
+      .then(() => {
+        alert("data berhasil dihapus");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "http://localhost:3300/pegawai",
+    }).then((result) => {
+      setPegawaiList(result.data.data);
+    });
+  });
+
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
@@ -289,6 +316,7 @@ const Pegawai = () => {
                 <thead>
                   <tr>
                     <th>No.</th>
+                    <th hidden>Pegawai ID</th>
                     <th>Nama Lengkap</th>
                     <th>Email</th>
                     <th>Tanggal Lahir</th>
@@ -300,25 +328,49 @@ const Pegawai = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Chandra Halim</td>
-                    <td>chan.halim98@gmail.com</td>
-                    <td>12/12/2020</td>
-                    <td>0891231312</td>
-                    <td>Rp -</td>
-                    <td>08/08/2008</td>
-                    <td>Operator CTP</td>
-                    <td className="d-flex justify-content-center">
-                      <a className="btn px-4 btn-success" href="editkaryawan">
-                        Edit
-                      </a>{" "}
-                      |{" "}
-                      <a className="btn px-4  btn-danger" href="a">
-                        Hapus
-                      </a>
-                    </td>
-                  </tr>
+                  {pegawaiList.map((pegawai, i) => {
+                    const {
+                      pegawaiID,
+                      namalengkap,
+                      email,
+                      tanggallahir,
+                      nomortelpon,
+                      gaji,
+                      tanggalmasuk,
+                      jabatan,
+                    } = pegawai;
+
+                    return (
+                      <tr key={i}>
+                        <td className="text-center">{i + 1}</td>
+                        <td hidden>{pegawaiID}</td>
+                        <td>{namalengkap}</td>
+                        <td>{email}</td>
+                        <td>{tanggallahir}</td>
+                        <td>{nomortelpon}</td>
+                        <td>{gaji}</td>
+                        <td>{tanggalmasuk}</td>
+                        <td>{jabatan}</td>
+                        <td className="d-flex justify-content-center">
+                          <a
+                            className="btn px-4 btn-success"
+                            href={`editkaryawan/${pegawaiID}`}
+                          >
+                            Edit
+                          </a>{" "}
+                          |{" "}
+                          <a
+                            className="btn px-4 btn-danger"
+                            onClick={() => {
+                              deleteUser(pegawaiID);
+                            }}
+                          >
+                            Hapus
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </Table>
               {/*   <!-- /.container-fluid --> */}

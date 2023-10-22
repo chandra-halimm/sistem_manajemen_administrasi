@@ -1,33 +1,60 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 import "../../style/Dashboard.css";
 
-const Editkaryawan = () => {
+const EditKaryawan = () => {
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
 
   const changeStyle = () => {
-    if (
-      style === "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-    ) {
-      setStyle(
-        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
-      );
-    } else {
-      setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
-    }
+    setStyle((prevStyle) => {
+      return prevStyle ===
+        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        ? "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
+        : "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion";
+    });
   };
+
   const changeStyle1 = () => {
-    if (
-      style === "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-    ) {
-      setStyle(
-        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled1"
-      );
-    } else {
-      setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
-    }
+    setStyle((prevStyle) => {
+      return prevStyle ===
+        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        ? "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled1"
+        : "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion";
+    });
+  };
+
+  const [namaLengkap, setNamaLengkap] = useState("aaa");
+  const [email, setEmail] = useState("");
+  const [tanggalLahir, setTanggalLahir] = useState("");
+  const [nomorTelpon, setNomorTelpon] = useState("");
+  const [gaji, setGaji] = useState("");
+  const [tanggalMasuk, setTanggalMasuk] = useState("");
+  const [jabatan, setJabatan] = useState("");
+
+  const inputPegawai = () => {
+    const requestingData = {
+      namaLengkap: namaLengkap,
+      email: email,
+      tanggalLahir: tanggalLahir,
+      nomorTelpon: nomorTelpon,
+      gaji: gaji,
+      tanggalMasuk: tanggalMasuk,
+      jabatan: jabatan,
+    };
+    axios
+      .post("http://localhost:3300/pegawai", requestingData)
+      .then((response) => {
+        console.log(response.data);
+        alert("Data berhasil ditambah");
+      })
+      .catch((error) => {
+        console.error("Axios Error:", error);
+        console.log("Error Status:", error.response?.status);
+        console.log("Error Data:", error.response?.data);
+      });
   };
 
   return (
@@ -449,16 +476,12 @@ const Editkaryawan = () => {
               <div className="container-fluid">
                 {/*  <!-- Page Heading --> */}
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                  <h1 className="h3 mb-0 text-gray-800">Input Karyawan</h1>
+                  <h1 className="h3 mb-0 text-gray-800">Input Pegawai</h1>
                   <a
-                    href="inputkaryawan"
-                    onClick={() => {
-                      window.location.replace("/inputkaryawan");
-                    }}
+                    href="pegawai"
                     className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                   >
-                    <i className="fas fa-download fa-sm text-white-50"></i>{" "}
-                    Tambah Karyawan
+                    <i className="p-2 text-white-50"></i> Kembali
                   </a>
                 </div>
               </div>
@@ -466,25 +489,81 @@ const Editkaryawan = () => {
                 <div className="col-8">
                   <Form>
                     <Form.Group className="mb-3" controlId="nip">
-                      <Form.Label>NIP</Form.Label>
-                      <Form.Control type="nip" placeholder="Masukkan nip" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="nama">
                       <Form.Label>Nama Lengkap</Form.Label>
                       <Form.Control
-                        type="nama"
+                        type="text"
                         placeholder="Masukkan nama lengkap"
+                        onChange={(event) => {
+                          setNamaLengkap(event.target.value);
+                          console.log(event.target.value);
+                        }}
+                        required
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="email">
                       <Form.Label>Email</Form.Label>
-                      <Form.Control type="email" placeholder="Masukkan email" />
+                      <Form.Control
+                        type="text"
+                        placeholder="Masukkan email"
+                        onChange={(event) => {
+                          setEmail(event.target.value);
+                          console.log(event.target.value);
+                        }}
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="tanggallahir">
+                      <Form.Label>Tanggal Lahir</Form.Label>
+                      <Form.Control
+                        type="date"
+                        placeholder="Masukkan tanggal lahir"
+                        onChange={(event) => {
+                          setTanggalLahir(event.target.value);
+                          console.log(event.target.value);
+                        }}
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="nomortelepon">
+                      <Form.Label>Nomor Telepon</Form.Label>
+                      <Form.Control
+                        type="number"
+                        placeholder="Masukkan nomor telepon"
+                        onChange={(event) => {
+                          setNomorTelpon(event.target.value);
+                          console.log(event.target.value);
+                        }}
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="gaji">
+                      <Form.Label>Gaji</Form.Label>
+                      <Form.Control
+                        type="number"
+                        placeholder="Masukkan gaji"
+                        onChange={(event) => {
+                          setGaji(event.target.value);
+                          console.log(event.target.value);
+                        }}
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="tanggalmasuk">
+                      <Form.Label>Tanggal Masuk</Form.Label>
+                      <Form.Control
+                        type="date"
+                        placeholder="Masukkan tanggal masuk"
+                        onChange={(event) => {
+                          setTanggalMasuk(event.target.value);
+                          console.log(event.target.value);
+                        }}
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="jabatan">
                       <Form.Label>Jabatan</Form.Label>
                       <select
                         class="form-select form-select-sm mb-3"
                         aria-label=".form-select-sm example"
+                        onChange={(event) => {
+                          setJabatan(event.target.value);
+                          console.log(event.target.value);
+                        }}
                       >
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
@@ -492,7 +571,13 @@ const Editkaryawan = () => {
                         <option value="3">Three</option>
                       </select>
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button
+                      variant="primary"
+                      type="button"
+                      onClick={() => {
+                        inputPegawai();
+                      }}
+                    >
                       Submit
                     </Button>
                   </Form>
@@ -518,4 +603,4 @@ const Editkaryawan = () => {
   );
 };
 
-export default Editkaryawan;
+export default EditKaryawan;

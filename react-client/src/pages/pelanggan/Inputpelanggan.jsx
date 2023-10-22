@@ -465,32 +465,31 @@ const InputPelanggan = () => {
               <div className="row d-flex justify-content-center">
                 <div className="col-8">
                   <Form>
-                    <Form.Group className="mb-3" controlId="nip">
-                      <Form.Label>NIP</Form.Label>
-                      <Form.Control type="nip" placeholder="Masukkan nip" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="nama">
-                      <Form.Label>Nama Lengkap</Form.Label>
+                    <Form.Group className="mb-3" controlId="namapelanggan">
+                      <Form.Label>Nama Pelanggan</Form.Label>
                       <Form.Control
-                        type="nama"
-                        placeholder="Masukkan nama lengkap"
+                        type="text"
+                        placeholder="masukkan nama pelanggan"
                       />
                     </Form.Group>
+                    <Form.Group className="mb-3" controlId="alamat">
+                      <Form.Label>Alamat</Form.Label>
+                      <Form.Control
+                        type="alamat"
+                        placeholder="Masukkan alamat"
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="number">
+                      <Form.Label>Nomor Telepon</Form.Label>
+                      <Form.Control
+                        type="number"
+                        placeholder="masukkan nomor telepon"
+                      />
+                    </Form.Group>
+
                     <Form.Group className="mb-3" controlId="email">
                       <Form.Label>Email</Form.Label>
-                      <Form.Control type="email" placeholder="Masukkan email" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="jabatan">
-                      <Form.Label>Jabatan</Form.Label>
-                      <select
-                        class="form-select form-select-sm mb-3"
-                        aria-label=".form-select-sm example"
-                      >
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
+                      <Form.Control type="email" placeholder="masukkan email" />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                       Submit
