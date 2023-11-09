@@ -1,8 +1,35 @@
-import React, { useState } from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import "../../style/Dashboard.css";
+import axios from "axios";
 
 const DataPelanggan = () => {
+  const [pelangganList, setPelangganList] = useState([]);
+
+  const deleteUser = (pelangganID) => {
+    axios({
+      method: "DELETE",
+      url: `http://localhost:3300/pelanggan/${pelangganID}`,
+    })
+      .then(() => {
+        alert("data berhasil dihapus");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "http://localhost:3300/pelanggan",
+    }).then((result) => {
+      setPelangganList(result.data.data);
+    });
+  }, []);
+
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
@@ -99,21 +126,20 @@ const DataPelanggan = () => {
                 className="nav-link collapsed"
                 href="a#"
                 data-toggle="collapse"
-                data-target="#collapseTwo"
+                data-target="#collapseone"
                 aria-expanded="true"
-                aria-controls="collapseTwo"
+                aria-controls="collapseone"
               >
                 <i className="fas fa-fw fa-cog"></i>
                 <span>Data Transaksi</span>
               </a>
               <div
-                id="collapseTwo"
+                id="collapseone"
                 className="collapse"
                 aria-labelledby="headingTwo"
                 data-parent="#accordionSidebar"
               >
                 <div className="bg-white py-2 collapse-inner rounded">
-                  <h6 className="collapse-header">Transaksi</h6>
                   <a className="collapse-item" href="buttons.html">
                     Informasi Transaksi
                   </a>
@@ -129,10 +155,35 @@ const DataPelanggan = () => {
 
             {/*  <!-- Nav Item - Tables --> */}
             <li className="nav-item">
-              <a className="nav-link" href="databarang">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Datang Barang</span>
+              <a
+                className="nav-link collapsed"
+                href="a#"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+              >
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Data Barang</span>
               </a>
+              <div
+                id="collapseTwo"
+                className="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+              >
+                <div className="bg-white py-2 collapse-inner rounded">
+                  <a className="collapse-item" href="buttons.html">
+                    Informasi Barang
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Barang Masuk
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Barang Keluar
+                  </a>
+                </div>
+              </div>
             </li>
 
             {/* <!-- Divider --> */}
@@ -271,7 +322,7 @@ const DataPelanggan = () => {
               <div className="container-fluid">
                 {/*  <!-- Page Heading --> */}
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                  <h1 className="h3 mb-0 text-gray-800">Tabel Pegawai</h1>
+                  <h1 className="h3 mb-0 text-gray-800">Tabel Pelanggan</h1>
                   <a
                     href="inputpelanggan"
                     className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
@@ -286,6 +337,7 @@ const DataPelanggan = () => {
                 <thead>
                   <tr>
                     <th>No.</th>
+                    <th>Pelanggan ID</th>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
                     <th>Nomor Telepon</th>
@@ -294,22 +346,42 @@ const DataPelanggan = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Jambi Ekspress</td>
-                    <td>Mayang dekat sini</td>
-                    <td>0213123413</td>
-                    <td>jambiekspress@gmail.com</td>
-                    <td className="d-flex justify-content-center">
-                      <a className="btn px-4 btn-success" href="editpelanggan">
-                        Edit
-                      </a>{" "}
-                      |{" "}
-                      <a className="btn px-4  btn-danger" href="hapuspelanggan">
-                        Hapus
-                      </a>
-                    </td>
-                  </tr>
+                  {pelangganList.map((pelanggan, i) => {
+                    const {
+                      pelangganID,
+                      namapelanggan,
+                      alamat,
+                      nomortelepon,
+                      email,
+                    } = pelanggan;
+                    return (
+                      <tr key={i}>
+                        <td className="text-center">{i + 1}</td>
+                        <td>{pelangganID}</td>
+                        <td>{namapelanggan}</td>
+                        <td>{alamat}</td>
+                        <td>{nomortelepon}</td>
+                        <td>{email}</td>
+                        <td className="d-flex justify-content-center">
+                          <a
+                            className="btn px-4 btn-success"
+                            href="editpelanggan"
+                          >
+                            Edit
+                          </a>{" "}
+                          |{" "}
+                          <a
+                            className="btn px-4  btn-danger"
+                            onClick={() => {
+                              deleteUser(pelangganID);
+                            }}
+                          >
+                            Hapus
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </Table>
               {/*   <!-- /.container-fluid --> */}

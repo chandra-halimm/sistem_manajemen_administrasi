@@ -99,6 +99,13 @@ const Inputkaryawan = () => {
             {/*  <!-- Divider --> */}
             <hr className="sidebar-divider" />
 
+            <li className="nav-item">
+              <a href="pelanggan" className="nav-link" type="submit">
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+
             {/* <!-- Nav Item - Charts --> */}
             <li className="nav-item">
               <a
@@ -123,17 +130,68 @@ const Inputkaryawan = () => {
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Masuk</span>
+              <a
+                className="nav-link collapsed"
+                href="a#"
+                data-toggle="collapse"
+                data-target="#collapseone"
+                aria-expanded="true"
+                aria-controls="collapseone"
+              >
+                <i className="fas fa-fw fa-cog"></i>
+                <span>Data Transaksi</span>
               </a>
+              <div
+                id="collapseone"
+                className="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+              >
+                <div className="bg-white py-2 collapse-inner rounded">
+                  <a className="collapse-item" href="buttons.html">
+                    Informasi Transaksi
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Penjualan
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Pembelian
+                  </a>
+                </div>
+              </div>
             </li>
 
+            {/*  <!-- Nav Item - Tables --> */}
             <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Keluar</span>
+              <a
+                className="nav-link collapsed"
+                href="a#"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+              >
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Data Barang</span>
               </a>
+              <div
+                id="collapseTwo"
+                className="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+              >
+                <div className="bg-white py-2 collapse-inner rounded">
+                  <a className="collapse-item" href="buttons.html">
+                    Informasi Barang
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Barang Masuk
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Barang Keluar
+                  </a>
+                </div>
+              </div>
             </li>
 
             {/* <!-- Divider --> */}

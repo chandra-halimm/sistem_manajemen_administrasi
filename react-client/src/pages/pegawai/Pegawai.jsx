@@ -28,7 +28,7 @@ const Pegawai = () => {
     }).then((result) => {
       setPegawaiList(result.data.data);
     });
-  });
+  }, []);
 
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
@@ -126,21 +126,20 @@ const Pegawai = () => {
                 className="nav-link collapsed"
                 href="a#"
                 data-toggle="collapse"
-                data-target="#collapseTwo"
+                data-target="#collapseone"
                 aria-expanded="true"
-                aria-controls="collapseTwo"
+                aria-controls="collapseone"
               >
                 <i className="fas fa-fw fa-cog"></i>
                 <span>Data Transaksi</span>
               </a>
               <div
-                id="collapseTwo"
+                id="collapseone"
                 className="collapse"
                 aria-labelledby="headingTwo"
                 data-parent="#accordionSidebar"
               >
                 <div className="bg-white py-2 collapse-inner rounded">
-                  <h6 className="collapse-header">Transaksi</h6>
                   <a className="collapse-item" href="buttons.html">
                     Informasi Transaksi
                   </a>
@@ -156,10 +155,35 @@ const Pegawai = () => {
 
             {/*  <!-- Nav Item - Tables --> */}
             <li className="nav-item">
-              <a className="nav-link" href="databarang">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Datang Barang</span>
+              <a
+                className="nav-link collapsed"
+                href="a#"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+              >
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Data Barang</span>
               </a>
+              <div
+                id="collapseTwo"
+                className="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+              >
+                <div className="bg-white py-2 collapse-inner rounded">
+                  <a className="collapse-item" href="buttons.html">
+                    Informasi Barang
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Barang Masuk
+                  </a>
+                  <a className="collapse-item" href="cards.html">
+                    Barang Keluar
+                  </a>
+                </div>
+              </div>
             </li>
 
             {/* <!-- Divider --> */}

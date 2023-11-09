@@ -16,8 +16,6 @@ router.get("/", (req, res) => {
   });
 });
 
-module.exports = router;
-
 router.post("/", (req, res) => {
   const { namapelanggan, alamat, nomortelepon, email } = req.body;
   const values = [namapelanggan, alamat, nomortelepon, email];
@@ -38,3 +36,32 @@ router.post("/", (req, res) => {
     }
   });
 });
+
+router.delete("/:pelangganID", (req, res) => {
+  const { pelangganID } = req.params;
+
+  try {
+    db.query(
+      `DELETE FROM pelanggan WHERE pelangganID = ${pelangganID}`,
+      (err, result) => {
+        if (err) {
+          return res.status(400).json({
+            message: "Error deleting data",
+          });
+        } else {
+          return res.status(200).json({
+            data: result,
+            message: "Data deleted successfully",
+          });
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
+
+module.exports = router;
