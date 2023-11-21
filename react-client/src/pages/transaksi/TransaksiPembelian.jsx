@@ -1,60 +1,56 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
-import "../../style/Dashboard.css";
+import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import "../../style/Dashboard.css";
 
-const DataPelanggan = () => {
-  const [pelangganList, setPelangganList] = useState([]);
-
-  const deleteUser = (pelangganID) => {
-    axios({
-      method: "DELETE",
-      url: `http://localhost:3300/pelanggan/${pelangganID}`,
-    })
-      .then(() => {
-        alert("data berhasil dihapus");
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: "http://localhost:3300/pelanggan",
-    }).then((result) => {
-      setPelangganList(result.data.data);
-    });
-  }, []);
-
+const TransaksiPembelian = () => {
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
 
   const changeStyle = () => {
-    if (
-      style === "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-    ) {
-      setStyle(
-        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
-      );
-    } else {
-      setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
-    }
+    setStyle((prevStyle) => {
+      return prevStyle ===
+        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        ? "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
+        : "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion";
+    });
   };
+
   const changeStyle1 = () => {
-    if (
-      style === "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-    ) {
-      setStyle(
-        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled1"
-      );
-    } else {
-      setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
-    }
+    setStyle((prevStyle) => {
+      return prevStyle ===
+        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        ? "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled1"
+        : "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion";
+    });
+  };
+
+  const [namaBarang, setNamaBarang] = useState("");
+  const [jumlah, setJumlah] = useState("");
+  const [harga, setHarga] = useState("");
+
+  const addPembelian = () => {
+    const requestingData = {
+      namabarang: namaBarang, // Match the key to the server-side naming
+      jumlah: jumlah,
+      harga: harga,
+    };
+
+    axios({
+      method: "POST",
+      url: "http://localhost:3300/transaksi/pembelian",
+      data: requestingData,
+    })
+      .then(() => {
+        alert("data berhasil ditambahkan");
+      })
+      .catch((error) => {
+        console.error("Axios Error:", error);
+        console.log("Error Status:", error.response?.status);
+        console.log("Error Data:", error.response?.data);
+      });
   };
 
   return (
@@ -82,6 +78,14 @@ const DataPelanggan = () => {
             {/*   <!-- Divider --> */}
             <hr className="sidebar-divider my-0" />
 
+            {/*  <!-- Nav Item - Dashboard --> */}
+            {/* <li className="nav-item active">
+              <a className="nav-link" href="index.html">
+                <i className="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+              </a>
+            </li> */}
+
             {/*  <!-- Divider --> */}
             <hr className="sidebar-divider" />
 
@@ -92,7 +96,6 @@ const DataPelanggan = () => {
             <hr className="sidebar-divider" />
 
             {/* <!-- Nav Item - Charts --> */}
-
             <li className="nav-item">
               <a href="pelanggan" className="nav-link" type="submit">
                 <i className="fas fa-fw fa-chart-area"></i>
@@ -286,33 +289,6 @@ const DataPelanggan = () => {
                       />
                     </a>
                     {/*  <!-- Dropdown - User Information --> */}
-                    <div
-                      className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                      aria-labelledby="userDropdown"
-                    >
-                      <a className="dropdown-item" href="a">
-                        <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                      </a>
-                      <a className="dropdown-item" href="a">
-                        <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                      </a>
-                      <a className="dropdown-item" href="a">
-                        <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
-                      </a>
-                      <div className="dropdown-divider"></div>
-                      <a
-                        className="dropdown-item"
-                        href="a"
-                        data-toggle="modal"
-                        data-target="alogoutModal"
-                      >
-                        <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
-                      </a>
-                    </div>
                   </li>
                 </ul>
               </nav>
@@ -322,68 +298,60 @@ const DataPelanggan = () => {
               <div className="container-fluid">
                 {/*  <!-- Page Heading --> */}
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                  <h1 className="h3 mb-0 text-gray-800">Tabel Pelanggan</h1>
-                  <a
-                    href="inputpelanggan"
-                    className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-                  >
-                    <i className="fas fa-download fa-sm text-white-50"></i>{" "}
-                    Tambah Pelanggan
-                  </a>
+                  <h1 className="h3 mb-0 text-gray-800">Input Pelanggan</h1>
+                </div>
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-8">
+                  <Form>
+                    <Form.Label>Nama Barang</Form.Label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      value={namaBarang}
+                      onChange={(e) => setNamaBarang(e.target.value)}
+                    >
+                      <option>Pilih Barang</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </Form.Select>
+
+                    <Form.Group className="mb-3" controlId="alamat">
+                      <Form.Label>Jumlah</Form.Label>
+                      <Form.Control
+                        type="alamat"
+                        placeholder="Masukkan jumlah"
+                        onChange={(event) => {
+                          setJumlah(event.target.value);
+                        }}
+                        required
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="number">
+                      <Form.Label>Harga</Form.Label>
+                      <Form.Control
+                        type="number"
+                        placeholder="masukkan harga"
+                        onChange={(event) => {
+                          setHarga(event.target.value);
+                        }}
+                        required
+                      />
+                    </Form.Group>
+
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      onClick={() => {
+                        addPembelian();
+                      }}
+                    >
+                      Submit
+                    </Button>
+                  </Form>
                 </div>
               </div>
 
-              <Table striped bordered hover size="lg">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th hidden>Pelanggan ID</th>
-                    <th>Nama Pelanggan</th>
-                    <th>Alamat</th>
-                    <th>Nomor Telepon</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pelangganList.map((pelanggan, i) => {
-                    const {
-                      pelangganID,
-                      namapelanggan,
-                      alamat,
-                      nomortelepon,
-                      email,
-                    } = pelanggan;
-                    return (
-                      <tr key={i}>
-                        <td className="text-center">{i + 1}</td>
-                        <td hidden>{pelangganID}</td>
-                        <td>{namapelanggan}</td>
-                        <td>{alamat}</td>
-                        <td>{nomortelepon}</td>
-                        <td>{email}</td>
-                        <td className="d-flex justify-content-center">
-                          <a
-                            className="btn px-4 btn-success"
-                            href="editpelanggan"
-                          >
-                            Edit
-                          </a>{" "}
-                          |{" "}
-                          <a
-                            className="btn px-4  btn-danger"
-                            onClick={() => {
-                              deleteUser(pelangganID);
-                            }}
-                          >
-                            Hapus
-                          </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
               {/*   <!-- /.container-fluid --> */}
             </div>
 
@@ -403,4 +371,4 @@ const DataPelanggan = () => {
   );
 };
 
-export default DataPelanggan;
+export default TransaksiPembelian;
