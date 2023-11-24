@@ -29,12 +29,12 @@ router.get("/pembelian", async (req, res) => {
 });
 
 router.post("/pembelian", async (req, res) => {
-  const { namabarang, jumlah, harga } = req.body;
+  const { namabarang, supplier, jumlah, harga } = req.body;
 
   try {
     const sqlQuery =
-      "INSERT INTO beli (namabarang, jumlah, harga) VALUES (?,?,?)";
-    const values = [namabarang, jumlah, harga];
+      "INSERT INTO beli (namabarang, jumlah, harga) VALUES (?,?,?,)";
+    const values = [namabarang, supplier, jumlah, harga];
 
     const result = await new Promise((resolve, reject) => {
       db.query(sqlQuery, values, (err, result) => {
@@ -64,13 +64,9 @@ router.post("/pembelian", async (req, res) => {
   }
 });
 
-// penjualan
-
 router.get("/penjualan", async (req, res) => {
   try {
-    const sqlQuery =
-      "SELECT penjualan.penjualanID, penjualan.namapelanggan, penjualan.namabarang, penjualan.jumlah, penjualan.harga, barang.namabarang AS namabarang, pelanggan.namapelanggan AS namapelanggan FROM penjualan INNER JOIN barang ON penjualan.barangID = barang.barangID INNER JOIN pelanggan ON penjualan.pelangganID = pelanggan.pelangganID";
-
+    const sqlQuery = "SELECT * FROM penjualan";
     const result = await new Promise((resolve, reject) => {
       db.query(sqlQuery, (err, rows) => {
         if (err) {
@@ -94,12 +90,19 @@ router.get("/penjualan", async (req, res) => {
 });
 
 router.post("/penjualan", async (req, res) => {
-  const { namabarang, jumlah, harga } = req.body;
+  const { namapelanggan, eksemplar, harga } = req.body;
 
   try {
+    // Input validation
+    if (!namapelanggan || eksemplar == null || harga == null) {
+      return res.status(400).json({
+        message: "Please provide all required fields",
+      });
+    }
+
     const sqlQuery =
-      "INSERT INTO beli (namabarang, jumlah, harga) VALUES (?,?,?)";
-    const values = [namabarang, jumlah, harga];
+      "INSERT INTO penjualan (namapelanggan, eksemplar, harga) VALUES (?,?,?)";
+    const values = [namapelanggan, eksemplar, harga];
 
     const result = await new Promise((resolve, reject) => {
       db.query(sqlQuery, values, (err, result) => {
@@ -111,20 +114,14 @@ router.post("/penjualan", async (req, res) => {
       });
     });
 
-    if (namabarang == null) {
-      return res.status(400).json({
-        message: "namabarang cannot be null or undefined",
-      });
-    }
-
     return res.status(200).json({
       data: result,
-      message: "success insert data",
+      message: "Success: Data inserted",
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "internal server error",
+      message: "Internal server error",
     });
   }
 });

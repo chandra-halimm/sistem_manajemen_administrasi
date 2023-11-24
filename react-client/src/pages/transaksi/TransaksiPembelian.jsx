@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import "../../style/Dashboard.css";
+import { useEffect } from "react";
 
 const TransaksiPembelian = () => {
   const [style, setStyle] = useState(
@@ -27,9 +28,19 @@ const TransaksiPembelian = () => {
     });
   };
 
+  const [dataBarang, setDatBarang] = useState([]);
   const [namaBarang, setNamaBarang] = useState("");
   const [jumlah, setJumlah] = useState("");
   const [harga, setHarga] = useState("");
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "http://localhost:3300/barang",
+    }).then((result) => {
+      setDatBarang(result.data.data);
+    });
+  }, []);
 
   const addPembelian = () => {
     const requestingData = {
@@ -311,15 +322,33 @@ const TransaksiPembelian = () => {
                       onChange={(e) => setNamaBarang(e.target.value)}
                     >
                       <option>Pilih Barang</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+
+                      {dataBarang.map((barang) => (
+                        <option key={barang.barangID} value={barang.namabarang}>
+                          {barang.namabarang}
+                        </option>
+                      ))}
+                    </Form.Select>
+
+                    <Form.Label>Nama Supplier</Form.Label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      value={namaBarang}
+                      onChange={(e) => setNamaBarang(e.target.value)}
+                    >
+                      <option>Pilih Supplier</option>
+
+                      {dataBarang.map((barang) => (
+                        <option key={barang.barangID} value={barang.namabarang}>
+                          {barang.namabarang}
+                        </option>
+                      ))}
                     </Form.Select>
 
                     <Form.Group className="mb-3" controlId="alamat">
                       <Form.Label>Jumlah</Form.Label>
                       <Form.Control
-                        type="alamat"
+                        type="number"
                         placeholder="Masukkan jumlah"
                         onChange={(event) => {
                           setJumlah(event.target.value);

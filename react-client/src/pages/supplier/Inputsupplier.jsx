@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import "../../style/Dashboard.css";
 
-const TransaksiPenjualan = () => {
+const Inputsupplier = () => {
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
@@ -27,34 +27,26 @@ const TransaksiPenjualan = () => {
     });
   };
 
-  const [dataPelanggan, setDataPelanggan] = useState([]);
-  const [namapelanggan, setNamaPelanggan] = useState("");
-  const [eksemplar, setEksemplar] = useState("");
-  const [harga, setHarga] = useState("");
+  const [namaSupplier, setNamaSupplier] = useState("");
+  const [alamat, setAlamat] = useState("");
+  const [email, setEmail] = useState("");
+  const [noHp, setNoHp] = useState("");
 
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: "http://localhost:3300/pelanggan",
-    }).then((result) => {
-      setDataPelanggan(result.data.data);
-    });
-  }, []);
-
-  const addPenjualan = () => {
+  const addSupplier = () => {
     const requestingData = {
-      namapelanggan: namapelanggan,
-      eksemplar: eksemplar,
-      harga: harga,
+      namasupplier: namaSupplier,
+      alamat: alamat,
+      email: email,
+      nohp: noHp,
     };
-
     axios({
       method: "POST",
-      url: "http://localhost:3300/transaksi/penjualan",
+      url: "http://localhost:3300/supplier",
       data: requestingData,
     })
-      .then(() => {
-        alert("data berhasil ditambahkan");
+      .then((response) => {
+        console.log(response.data);
+        alert("data berhasil ditambah");
       })
       .catch((error) => {
         console.error("Axios Error:", error);
@@ -87,6 +79,14 @@ const TransaksiPenjualan = () => {
 
             {/*   <!-- Divider --> */}
             <hr className="sidebar-divider my-0" />
+
+            {/*  <!-- Nav Item - Dashboard --> */}
+            {/* <li className="nav-item active">
+              <a className="nav-link" href="index.html">
+                <i className="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+              </a>
+            </li> */}
 
             {/*  <!-- Divider --> */}
             <hr className="sidebar-divider" />
@@ -300,10 +300,10 @@ const TransaksiPenjualan = () => {
               <div className="container-fluid">
                 {/*  <!-- Page Heading --> */}
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                  <h1 className="h3 mb-0 text-gray-800">Input Penjualan</h1>
+                  <h1 className="h3 mb-0 text-gray-800">Input Supplier</h1>
                   <a
                     onClick={() => {
-                      window.location.replace("/transaksipenjualan");
+                      window.location.replace("/pelanggan");
                     }}
                     className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                   >
@@ -314,49 +314,57 @@ const TransaksiPenjualan = () => {
               <div className="row d-flex justify-content-center">
                 <div className="col-8">
                   <Form>
-                    <Form.Label>Nama Pelanggan</Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      value={namapelanggan}
-                      onChange={(e) => setNamaPelanggan(e.target.value)}
-                    >
-                      <option>Pilih Pelanggan</option>
-                      {dataPelanggan.map((pelanggan) => (
-                        <option
-                          key={pelanggan.pelangganID}
-                          value={pelanggan.namapelanggan}
-                        >
-                          {pelanggan.namapelanggan}
-                        </option>
-                      ))}
-                    </Form.Select>
-
-                    <Form.Group className="mb-3" controlId="jumlah">
-                      <Form.Label>Jumlah Eksemplar</Form.Label>
+                    <Form.Group className="mb-3" controlId="namapelanggan">
+                      <Form.Label>Nama Supplier</Form.Label>
                       <Form.Control
-                        type="number"
-                        placeholder="masukkan jumlah barang"
-                        value={eksemplar}
-                        onChange={(event) => setEksemplar(event.target.value)}
+                        type="text"
+                        placeholder="masukkan nama supplier"
+                        onChange={(event) => {
+                          setNamaSupplier(event.target.value);
+                        }}
+                        required
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="alamat">
+                      <Form.Label>Alamat</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Masukkan alamat"
+                        onChange={(event) => {
+                          setAlamat(event.target.value);
+                        }}
+                        required
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="email">
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control
+                        type="email"
+                        placeholder="masukkan email"
+                        onChange={(event) => {
+                          setEmail(event.target.value);
+                        }}
                         required
                       />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="Harga">
-                      <Form.Label>Harga</Form.Label>
+                    <Form.Group className="mb-3" controlId="nohp">
+                      <Form.Label>No. handphone</Form.Label>
                       <Form.Control
                         type="number"
-                        placeholder="masukkan Harga"
-                        value={harga}
-                        onChange={(event) => setHarga(event.target.value)}
+                        placeholder="masukkan nomor telepon"
+                        onChange={(event) => {
+                          setNoHp(event.target.value);
+                        }}
                         required
                       />
                     </Form.Group>
-
                     <Button
                       variant="primary"
-                      type="button" // Changed to button
-                      onClick={() => addPenjualan()}
+                      type="submit"
+                      onClick={() => {
+                        addSupplier();
+                      }}
                     >
                       Submit
                     </Button>
@@ -383,4 +391,4 @@ const TransaksiPenjualan = () => {
   );
 };
 
-export default TransaksiPenjualan;
+export default Inputsupplier;

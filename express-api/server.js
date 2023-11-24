@@ -11,11 +11,13 @@ const pegawaiEndpoint = require("./routes/pegawai");
 const pelangganEndpoint = require("./routes/pelanggan");
 const transaksi = require("./routes/transaksi");
 const addBarangg = require("./routes/AddBarang");
+const supplier = require("./routes/supplier");
 
 app.use("/", loginEndpoint);
 app.use("/pegawai", pegawaiEndpoint);
 app.use("/pelanggan", pelangganEndpoint);
 app.use("/transaksi", transaksi);
-app.use("/addbarang", addBarangg);
+app.use("/barang", addBarangg);
+app.use("/supplier", supplier);
 
 app.listen(port, () => console.log(`running server on port : ${port}`));

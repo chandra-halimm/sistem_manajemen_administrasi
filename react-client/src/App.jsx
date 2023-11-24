@@ -9,6 +9,8 @@ import DataPelanggan from "./pages/pelanggan/Datapelanggan";
 import InputPelanggan from "./pages/pelanggan/Inputpelanggan";
 import TransaksiPembelian from "./pages/transaksi/TransaksiPembelian";
 import TransaksiPenjualan from "./pages/transaksi/TransaksiPenjualan";
+import Supplier from "./pages/supplier/Supplier";
+import InputSupplier from "./pages/supplier/Inputsupplier";
 import "./App.css";
 
 const App = () => {
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="/inputpelanggan" element={<InputPelanggan />} />
           <Route path="/transaksipembelian" element={<TransaksiPembelian />} />
           <Route path="/transaksipenjualan" element={<TransaksiPenjualan />} />
+          <Route path="/supplier" element={<Supplier />} />
+          <Route path="/inputsupplier" element={<InputSupplier />} />
         </Routes>
       </Router>
     </>

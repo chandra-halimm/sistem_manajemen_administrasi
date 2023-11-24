@@ -1,66 +1,60 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
 import "../../style/Dashboard.css";
+import axios from "axios";
 
-const TransaksiPenjualan = () => {
+const Supplier = () => {
+  const [dataSupplier, setDataSupplier] = useState([]);
+
+  const deleteUser = (supplierID) => {
+    axios({
+      method: "DELETE",
+      url: `http://localhost:3300/supplier/${supplierID}`,
+    })
+      .then(() => {
+        alert("data berhasil dihapus");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "http://localhost:3300/supplier",
+    }).then((result) => {
+      setDataSupplier(result.data.data);
+    });
+  }, []);
+
   const [style, setStyle] = useState(
     "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
   );
 
   const changeStyle = () => {
-    setStyle((prevStyle) => {
-      return prevStyle ===
-        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-        ? "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
-        : "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion";
-    });
+    if (
+      style === "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+    ) {
+      setStyle(
+        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
+      );
+    } else {
+      setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
+    }
   };
-
   const changeStyle1 = () => {
-    setStyle((prevStyle) => {
-      return prevStyle ===
-        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-        ? "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled1"
-        : "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion";
-    });
-  };
-
-  const [dataPelanggan, setDataPelanggan] = useState([]);
-  const [namapelanggan, setNamaPelanggan] = useState("");
-  const [eksemplar, setEksemplar] = useState("");
-  const [harga, setHarga] = useState("");
-
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: "http://localhost:3300/pelanggan",
-    }).then((result) => {
-      setDataPelanggan(result.data.data);
-    });
-  }, []);
-
-  const addPenjualan = () => {
-    const requestingData = {
-      namapelanggan: namapelanggan,
-      eksemplar: eksemplar,
-      harga: harga,
-    };
-
-    axios({
-      method: "POST",
-      url: "http://localhost:3300/transaksi/penjualan",
-      data: requestingData,
-    })
-      .then(() => {
-        alert("data berhasil ditambahkan");
-      })
-      .catch((error) => {
-        console.error("Axios Error:", error);
-        console.log("Error Status:", error.response?.status);
-        console.log("Error Data:", error.response?.data);
-      });
+    if (
+      style === "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+    ) {
+      setStyle(
+        "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled1"
+      );
+    } else {
+      setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
+    }
   };
 
   return (
@@ -98,6 +92,7 @@ const TransaksiPenjualan = () => {
             <hr className="sidebar-divider" />
 
             {/* <!-- Nav Item - Charts --> */}
+
             <li className="nav-item">
               <a href="pelanggan" className="nav-link" type="submit">
                 <i className="fas fa-fw fa-chart-area"></i>
@@ -115,7 +110,7 @@ const TransaksiPenjualan = () => {
                 }}
               >
                 <i className="fas fa-fw fa-chart-area"></i>
-                <span>Data Pegawai</span>
+                <span>Data Supplier</span>
               </a>
             </li>
 
@@ -291,6 +286,33 @@ const TransaksiPenjualan = () => {
                       />
                     </a>
                     {/*  <!-- Dropdown - User Information --> */}
+                    <div
+                      className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                      aria-labelledby="userDropdown"
+                    >
+                      <a className="dropdown-item" href="a">
+                        <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                      </a>
+                      <a className="dropdown-item" href="a">
+                        <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Settings
+                      </a>
+                      <a className="dropdown-item" href="a">
+                        <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Activity Log
+                      </a>
+                      <div className="dropdown-divider"></div>
+                      <a
+                        className="dropdown-item"
+                        href="a"
+                        data-toggle="modal"
+                        data-target="alogoutModal"
+                      >
+                        <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                      </a>
+                    </div>
                   </li>
                 </ul>
               </nav>
@@ -300,70 +322,67 @@ const TransaksiPenjualan = () => {
               <div className="container-fluid">
                 {/*  <!-- Page Heading --> */}
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                  <h1 className="h3 mb-0 text-gray-800">Input Penjualan</h1>
+                  <h1 className="h3 mb-0 text-gray-800">Tabel Supplier</h1>
                   <a
+                    href="inputsupplier"
                     onClick={() => {
-                      window.location.replace("/transaksipenjualan");
+                      window.location.replace("/inputsupplier");
                     }}
                     className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                   >
-                    <i className="fas fa-back fa-sm text-white-50"></i> Kembali
+                    <i className="fas fa-download fa-sm text-white-50"></i>{" "}
+                    Tambah Supplier
                   </a>
                 </div>
               </div>
-              <div className="row d-flex justify-content-center">
-                <div className="col-8">
-                  <Form>
-                    <Form.Label>Nama Pelanggan</Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      value={namapelanggan}
-                      onChange={(e) => setNamaPelanggan(e.target.value)}
-                    >
-                      <option>Pilih Pelanggan</option>
-                      {dataPelanggan.map((pelanggan) => (
-                        <option
-                          key={pelanggan.pelangganID}
-                          value={pelanggan.namapelanggan}
-                        >
-                          {pelanggan.namapelanggan}
-                        </option>
-                      ))}
-                    </Form.Select>
 
-                    <Form.Group className="mb-3" controlId="jumlah">
-                      <Form.Label>Jumlah Eksemplar</Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder="masukkan jumlah barang"
-                        value={eksemplar}
-                        onChange={(event) => setEksemplar(event.target.value)}
-                        required
-                      />
-                    </Form.Group>
+              <Table striped bordered hover size="lg">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th hidden>Supplier ID</th>
+                    <th>Nama Supplier</th>
+                    <th>Alamat</th>
+                    <th>Email</th>
+                    <th>no. handphone</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dataSupplier.map((supplier, i) => {
+                    const { supplierID, namasupplier, alamat, email, nohp } =
+                      supplier;
 
-                    <Form.Group className="mb-3" controlId="Harga">
-                      <Form.Label>Harga</Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder="masukkan Harga"
-                        value={harga}
-                        onChange={(event) => setHarga(event.target.value)}
-                        required
-                      />
-                    </Form.Group>
-
-                    <Button
-                      variant="primary"
-                      type="button" // Changed to button
-                      onClick={() => addPenjualan()}
-                    >
-                      Submit
-                    </Button>
-                  </Form>
-                </div>
-              </div>
-
+                    return (
+                      <tr key={i}>
+                        <td className="text-center">{i + 1}</td>
+                        <td hidden>{supplierID}</td>
+                        <td>{namasupplier}</td>
+                        <td>{alamat}</td>
+                        <td>{email}</td>
+                        <td>{nohp}</td>
+                        <td className="d-flex justify-content-center">
+                          <a
+                            className="btn px-4 btn-success"
+                            href={`editsupplier/${supplierID}`}
+                          >
+                            Edit
+                          </a>{" "}
+                          |{" "}
+                          <a
+                            className="btn px-4 btn-danger"
+                            onClick={() => {
+                              deleteUser(supplierID);
+                            }}
+                          >
+                            Hapus
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
               {/*   <!-- /.container-fluid --> */}
             </div>
 
@@ -383,4 +402,4 @@ const TransaksiPenjualan = () => {
   );
 };
 
-export default TransaksiPenjualan;
+export default Supplier;
