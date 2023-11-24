@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import "../../style/Dashboard.css";
 import axios from "axios";
+import Sidebar from "../../utils/Sidebar";
 
 const DataPelanggan = () => {
   const [pelangganList, setPelangganList] = useState([]);
@@ -93,98 +94,7 @@ const DataPelanggan = () => {
 
             {/* <!-- Nav Item - Charts --> */}
 
-            <li className="nav-item">
-              <a href="pelanggan" className="nav-link" type="submit">
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a
-                href="pegawai"
-                className="nav-link"
-                type="submit"
-                onClick={() => {
-                  window.location.replace("/pegawai");
-                }}
-              >
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Data Pegawai</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a href="pelanggan" className="nav-link" type="submit">
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Data Pelanggan</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a
-                className="nav-link collapsed"
-                href="a#"
-                data-toggle="collapse"
-                data-target="#collapseone"
-                aria-expanded="true"
-                aria-controls="collapseone"
-              >
-                <i className="fas fa-fw fa-cog"></i>
-                <span>Data Transaksi</span>
-              </a>
-              <div
-                id="collapseone"
-                className="collapse"
-                aria-labelledby="headingTwo"
-                data-parent="#accordionSidebar"
-              >
-                <div className="bg-white py-2 collapse-inner rounded">
-                  <a className="collapse-item" href="buttons.html">
-                    Informasi Transaksi
-                  </a>
-                  <a className="collapse-item" href="cards.html">
-                    Penjualan
-                  </a>
-                  <a className="collapse-item" href="cards.html">
-                    Pembelian
-                  </a>
-                </div>
-              </div>
-            </li>
-
-            {/*  <!-- Nav Item - Tables --> */}
-            <li className="nav-item">
-              <a
-                className="nav-link collapsed"
-                href="a#"
-                data-toggle="collapse"
-                data-target="#collapseTwo"
-                aria-expanded="true"
-                aria-controls="collapseTwo"
-              >
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Data Barang</span>
-              </a>
-              <div
-                id="collapseTwo"
-                className="collapse"
-                aria-labelledby="headingTwo"
-                data-parent="#accordionSidebar"
-              >
-                <div className="bg-white py-2 collapse-inner rounded">
-                  <a className="collapse-item" href="buttons.html">
-                    Informasi Barang
-                  </a>
-                  <a className="collapse-item" href="cards.html">
-                    Barang Masuk
-                  </a>
-                  <a className="collapse-item" href="cards.html">
-                    Barang Keluar
-                  </a>
-                </div>
-              </div>
-            </li>
+            <Sidebar />
 
             {/* <!-- Divider --> */}
             <hr className="sidebar-divider d-none d-md-block" />

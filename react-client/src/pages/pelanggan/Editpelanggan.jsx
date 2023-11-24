@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "../../style/Dashboard.css";
+import Sidebar from "../../utils/Sidebar";
 
 const EditPelanggan = () => {
   const [style, setStyle] = useState(
@@ -88,26 +89,7 @@ const EditPelanggan = () => {
             </li>
 
             {/*  <!-- Nav Item - Tables --> */}
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Datang Barang</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Masuk</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Keluar</span>
-              </a>
-            </li>
+            <Sidebar />
 
             {/* <!-- Divider --> */}
             <hr className="sidebar-divider d-none d-md-block" />

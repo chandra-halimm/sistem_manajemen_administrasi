@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import "../../style/Dashboard.css";
+import Sidebar from "../../utils/Sidebar";
 
 const EditKaryawan = () => {
   const [style, setStyle] = useState(
@@ -100,42 +101,7 @@ const EditKaryawan = () => {
             <hr className="sidebar-divider" />
 
             {/* <!-- Nav Item - Charts --> */}
-            <li className="nav-item">
-              <a
-                href="pegawai"
-                className="nav-link"
-                type="submit"
-                onClick={() => {
-                  window.location.replace("/pegawai");
-                }}
-              >
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Data Pegawai</span>
-              </a>
-            </li>
-
-            {/*  <!-- Nav Item - Tables --> */}
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Datang Barang</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Masuk</span>
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="tables.html">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Kas Keluar</span>
-              </a>
-            </li>
-
+            <Sidebar />
             {/* <!-- Divider --> */}
             <hr className="sidebar-divider d-none d-md-block" />
           </ul>
