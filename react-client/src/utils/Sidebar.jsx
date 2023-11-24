@@ -58,10 +58,10 @@ const Sidebar = () => {
             <a className="collapse-item" href="buttons.html">
               Informasi Transaksi
             </a>
-            <a className="collapse-item" href="cards.html">
+            <a className="collapse-item" href="/transaksipenjualan">
               Penjualan
             </a>
-            <a className="collapse-item" href="cards.html">
+            <a className="collapse-item" href="transaksipembelian">
               Pembelian
             </a>
           </div>

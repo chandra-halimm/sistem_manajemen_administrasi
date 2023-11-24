@@ -97,37 +97,6 @@ const Supplier = () => {
             <Sidebar />
 
             {/*  <!-- Nav Item - Tables --> */}
-            <li className="nav-item">
-              <a
-                className="nav-link collapsed"
-                href="a#"
-                data-toggle="collapse"
-                data-target="#collapseTwo"
-                aria-expanded="true"
-                aria-controls="collapseTwo"
-              >
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Data Barang</span>
-              </a>
-              <div
-                id="collapseTwo"
-                className="collapse"
-                aria-labelledby="headingTwo"
-                data-parent="#accordionSidebar"
-              >
-                <div className="bg-white py-2 collapse-inner rounded">
-                  <a className="collapse-item" href="buttons.html">
-                    Informasi Barang
-                  </a>
-                  <a className="collapse-item" href="cards.html">
-                    Barang Masuk
-                  </a>
-                  <a className="collapse-item" href="cards.html">
-                    Barang Keluar
-                  </a>
-                </div>
-              </div>
-            </li>
 
             {/* <!-- Divider --> */}
             <hr className="sidebar-divider d-none d-md-block" />
